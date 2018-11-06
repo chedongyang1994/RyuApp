@@ -27,13 +27,18 @@ class analysis_proto(simple_switch_13.SimpleSwitch13):
 		pkt_eth=pkt.get_protocols(ethernet.ethernet)[0]
 		pkt_ipv6=pkt.get_protocol(ipv6.ipv6)
 		pkt_icmpv6=pkt.get_protocol(icmpv6.icmpv6)
-
+		pkt_tcp=pkt.get_protocol(tcp.tcp)
+		pkt_udp=pkt.get_protocol(udp.udp)
 		if pkt_eth:
-			self.logger.info('ethernet: dst=%s  ethertype=0x%4x src=%s'%(pkt_eth.dst,pkt_eth.ethertype,pkt_eth.src))
+			self.logger.info('ethernet : dst=%s  ethertype=0x%4x src=%s'%(pkt_eth.dst,pkt_eth.ethertype,pkt_eth.src))
 		if pkt_ipv6:
-			self.logger.info('ipv6: version=%d  src=%s dst=%s'%(pkt_ipv6.version,pkt_ipv6.src,pkt_ipv6.dst))
+			self.logger.info('   ipv6  : version=%d  src=%s dst=%s'%(pkt_ipv6.version,pkt_ipv6.src,pkt_ipv6.dst))
 		if pkt_icmpv6:
-			self.logger.info('icmpv6: code=%s  data=%s'%(pkt_icmpv6.code,pkt_icmpv6.data))
+			self.logger.info('  icmpv6 : code=%s  data=%s'%(pkt_icmpv6.code,pkt_icmpv6.data))
+		if pkt_tcp:
+			self.logger.info('   tcp   :src_port=%d  dst_port=%d  seq=%d'%(pkt_tcp.src_port,pkt_tcp.dst_port,pkt_tcp.seq))
+		if pkt_udp:
+			self.logger.info('   udp   :src_port=%d  dst_port=%d'%(pkt_udp.src_port,pkt_udp.dst_port))
 		self.logger.info('---------------------------------------------')
 		
 
